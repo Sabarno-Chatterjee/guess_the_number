@@ -54,6 +54,7 @@ game()
 
 '''
 
+
 import art
 import random
 
@@ -65,7 +66,7 @@ def compare(guess):
   elif guess < pick:
     return "Too low."
   else:
-    return "Bingo, thats the answer."
+    return 0
 
 
 
@@ -74,11 +75,23 @@ print("Welcome to guess the number.\n")
 print("I am thinking of a number between 1-100 and you have to guess it\n")
 pick = random.randrange(1,101)
 print(f"Test code: {pick}\n")
+level = input("Choose a level 'Easy' or 'Hard'\n").lower()
+lives = 10
+if level == "hard":
+  lives = 5
 
 wrong_guess = True
 
 while wrong_guess:
+  if lives == 0:
+    print("Game over")
+    wrong_guess = False
   guess = int(input("Take a guess.\n"))
   check = compare(guess)
-  if 
-
+  if check == 0:
+    wrong_guess = False
+    print("Bingo, that's the answer.")
+  else:
+    print(check)
+    lives -= 1
+    print(f"You have {lives} remaining.")

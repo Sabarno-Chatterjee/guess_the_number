@@ -1,97 +1,46 @@
-'''
-import random
 import art
+import random
 
-EASY_LEVEL_TURNS = 10
-HARD_LEVEL_TURNS =5
 
-#Function to check user's guess
-def check_answer(guess, pick, lives):
-    """Checks users guess, returns the number of remaining lives"""
-    if guess > pick:
-        print("That's a bit high! Take your shot again.")
-        return lives - 1
-    elif guess < pick:
-        print("That's a bit low! Take your shot again.")
-        return lives - 1
-    else:
-        print(f"You won! The answer was {pick}")
+def number_guess():
 
-#Function to set difficulty
-def set_difficulty():
-    choice = input("Select a level of difficulty, easy or hard.\n").lower()
-    if choice == "easy":
-        return EASY_LEVEL_TURNS
-    elif choice == "hard":
-        return HARD_LEVEL_TURNS
+    def compare(guess):
+        if guess > pick:
+            return "\nToo high.\n"
+        elif guess < pick:
+            return "\nToo low.\n"
+        else:
+            return 0
 
-print(art.logo)
+    print(art.logo)
+    print("Welcome to guess the number.\n")
+    print("I am thinking of a number between 1-100 and you have to guess it\n")
+    pick = random.randrange(1, 101)
+    print(f"Test code: {pick}\n")
+    level = input("Choose a level 'Easy' or 'Hard'\n").lower()
+    lives = 10
+    if level == "hard":
+        lives = 5
 
-def game():
-    print("Welcome to the number guessing game.")
-    print("I'm thinking of a number between 1 and 100.")
-    pick = random.randint(1, 100)
-    #Test code:
-    #print(f"The correct answer is {pick}")
-    lives = set_difficulty()
+    wrong_guess = True
 
-    guess = 0
+    while wrong_guess:
 
-    while guess != pick:
-        print(f"Current number of lives are {lives}.")
-        #Lets the user take a guess
-        guess = int(input("Guess a number.\n"))
-        lives = check_answer(guess, pick, lives)
+        guess = int(input("Take a guess.\n"))
+        check = compare(guess)
+        if check == 0:
+            wrong_guess = False
+            print("Bingo, that's the answer.")
+        else:
+            print(check)
+            lives -= 1
+            print(f"You have {lives} guesses remaining.\n")
         if lives == 0:
-            print("Your are out of turns, you lose")
-            return
-        elif guess != pick:
-            print("Guess again")
+            print("Game over")
+            wrong_guess = False
 
 
-game()
+play = input("Do you want to play Guess the number? 'Yes or No'\n").lower()
 
-
-'''
-
-
-import art
-import random
-
-
-
-def compare(guess):
-  if guess > pick:
-    return"Too high."
-  elif guess < pick:
-    return "Too low."
-  else:
-    return 0
-
-
-
-print(art.logo)
-print("Welcome to guess the number.\n")
-print("I am thinking of a number between 1-100 and you have to guess it\n")
-pick = random.randrange(1,101)
-print(f"Test code: {pick}\n")
-level = input("Choose a level 'Easy' or 'Hard'\n").lower()
-lives = 10
-if level == "hard":
-  lives = 5
-
-wrong_guess = True
-
-while wrong_guess:
-  if lives == 0:
-    print("Game over")
-    wrong_guess = False
-  guess = int(input("Take a guess.\n"))
-  check = compare(guess)
-  if check == 0:
-    wrong_guess = False
-    print("Bingo, that's the answer.")
-  else:
-    print(check)
-    lives -= 1
-    print(f"You have {lives} remaining.")
+if play == "yes":
+    number_guess()

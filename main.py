@@ -1,10 +1,13 @@
 import art
 import random
+import replit
 
 
 def number_guess():
+    """Initiates the number guess game"""
 
     def compare(guess):
+        """Takes user guess as the parameter and compares it with the number picked by the computer."""
         if guess > pick:
             return "\nToo high.\n"
         elif guess < pick:
@@ -40,7 +43,14 @@ def number_guess():
             wrong_guess = False
 
 
-play = input("Do you want to play Guess the number? 'Yes or No'\n").lower()
+    play = input("Do you want to play Guess the number? 'Yes or No'\n").lower()
+    
+    if play == "yes":
+        replit.clear()
+        number_guess()
+    else:
+        print("Have a nice day!")
+    
+      
+number_guess()
 
-if play == "yes":
-    number_guess()

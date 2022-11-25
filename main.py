@@ -1,3 +1,4 @@
+'''
 import random
 import art
 
@@ -51,5 +52,33 @@ def game():
 game()
 
 
+'''
 
+import art
+import random
+
+
+
+def compare(guess):
+  if guess > pick:
+    return"Too high."
+  elif guess < pick:
+    return "Too low."
+  else:
+    return "Bingo, thats the answer."
+
+
+
+print(art.logo)
+print("Welcome to guess the number.\n")
+print("I am thinking of a number between 1-100 and you have to guess it\n")
+pick = random.randrange(1,101)
+print(f"Test code: {pick}\n")
+
+wrong_guess = True
+
+while wrong_guess:
+  guess = int(input("Take a guess.\n"))
+  check = compare(guess)
+  if 
 
